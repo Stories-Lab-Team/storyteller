@@ -2,6 +2,7 @@ export const PromptButton = ({ text, disabled, action }) => {
   return (
     <div>
       <button
+        type="button"
         className={'btn btn-primary btn-lg disabled:btn-disabled'}
         onClick={() => action()}
       >
