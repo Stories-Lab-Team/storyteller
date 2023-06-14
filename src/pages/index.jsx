@@ -173,20 +173,21 @@ export default function Home() {
         </div>
 
         <div className="w-1/2 pl-2">
-          <h2 className="text-xl font-bold mb-4">New Theme List</h2>
+          <h2 className="text-xl font-bold mb-4">🆕 New Theme List</h2>
           <div className="grid grid-cols-3 gap-4 text-sm font-semibold mb-2">
             <p className="col-span-1">Theme</p>
-            <p className="col-span-1">Creator</p>
             <p className="col-span-1">Collaborations</p>
+            <p className="col-span-1">Creator</p>
           </div>
           {newThemes.map((theme, index) => (
             <div
               key={index}
-              className="grid grid-cols-3 gap-4 mb-2 cursor-pointer shadow hover:shadow-md"
+              className="grid grid-cols-3 gap-6 mb-2 p-2 cursor-pointer shadow hover:shadow-md"
             >
               <p className="col-span-1">{theme.title}</p>
-              <p className="col-span-1">{theme.creator}</p>
+
               <p className="col-span-1">{theme.collabs}</p>
+              <p className="col-span-1">{theme.creator}</p>
             </div>
           ))}
           <Link href="/themes">
