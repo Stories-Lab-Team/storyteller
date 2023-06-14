@@ -13,10 +13,26 @@ export default function Dashboard() {
     setPreview(!preview);
   }
 
-  const handleCreate = () => {
-    // Here you might call a function to mint an NFT of the user's story
+  const handleCreate = async () => {
     console.log('Creating NFT...');
-  }
+
+    // connect to the user's wallet
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+
+    // connect to the smart contract 
+    const contract = new ethers.Contract(contractAddress, contractABI, signer);
+
+    try {
+      const transaction = await contract.mint(userAddress);
+      await transaction.wait();
+
+      console.log('NFT minted successfully!');
+    } catch (error) {
+      console.error('An error occurred while trying to mint the NFT:', error);
+    }
+}
+
 
   return (
     <main className="flex flex-col items-center p-12 bg-gray-100 min-h-screen">
