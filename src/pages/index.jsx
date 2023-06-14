@@ -8,9 +8,100 @@ export default function Home() {
     { id: 3, title: 'Card 3', image: 'https://via.placeholder.com/150' },
   ])
 
-  // assuming hotStories and newThemes are arrays of data
-  const hotStories = ['Story 1', 'Story 2', 'Story 3']
-  const newThemes = ['Theme 1', 'Theme 2', 'Theme 3']
+  //hotStories and newThemes
+  const hotStories = [
+    {
+      title: 'Story 1',
+      description: 'An intriguing tale of courage and resilience against odds.',
+      collabs: 15,
+      imageUrl: 'https://via.placeholder.com/150',
+      daysLeft: 4,
+    },
+    {
+      title: 'Story 2',
+      description:
+        'A heartwarming story about the enduring power of friendship.',
+      collabs: 21,
+      imageUrl: 'https://via.placeholder.com/150',
+      daysLeft: 3,
+    },
+    {
+      title: 'Story 3',
+      description:
+        'A thrilling mystery that keeps you on the edge of your seat.',
+      collabs: 8,
+      imageUrl: 'https://via.placeholder.com/150',
+      daysLeft: 7,
+    },
+    {
+      title: 'Story 4',
+      description: 'A poignant story about loss, grief, and recovery.',
+      collabs: 12,
+      imageUrl: 'https://via.placeholder.com/150',
+      daysLeft: 5,
+    },
+    {
+      title: 'Story 5',
+      description:
+        'A riveting sci-fi adventure in a world full of possibilities.',
+      collabs: 18,
+      imageUrl: 'https://via.placeholder.com/150',
+      daysLeft: 6,
+    },
+    // {
+    //   title: 'Story 6',
+    //   description:
+    //     'A hilarious comedy that will keep you laughing till the end.',
+    //   collabs: 9,
+    //   imageUrl: 'https://via.placeholder.com/150',
+    //   daysLeft: 7,
+    // },
+    // {
+    //   title: 'Story 7',
+    //   description:
+    //     'A chilling horror story that will give you sleepless nights.',
+    //   collabs: 14,
+    //   imageUrl: 'https://via.placeholder.com/150',
+    //   daysLeft: 2,
+    // },
+    // {
+    //   title: 'Story 8',
+    //   description:
+    //     'A historical drama set in the backdrop of the French Revolution.',
+    //   collabs: 20,
+    //   imageUrl: 'https://via.placeholder.com/150',
+    //   daysLeft: 5,
+    // },
+    // {
+    //   title: 'Story 9',
+    //   description:
+    //     'A whimsical fairy tale that captures the innocence of childhood.',
+    //   collabs: 16,
+    //   imageUrl: 'https://via.placeholder.com/150',
+    //   daysLeft: 3,
+    // },
+    // {
+    //   title: 'Story 10',
+    //   description:
+    //     'A psychological thriller with an unexpected twist at the end.',
+    //   collabs: 22,
+    //   imageUrl: 'https://via.placeholder.com/150',
+    //   daysLeft: 4,
+    // },
+  ]
+
+  const newThemes = [
+    { title: 'Nature Resilience', creator: 'UserA', collabs: 7 },
+    { title: 'Intricate Relationships', creator: 'UserB', collabs: 15 },
+    { title: 'Exploring the Cosmos', creator: 'UserC', collabs: 9 },
+    { title: 'Journey Through Time', creator: 'UserD', collabs: 12 },
+    { title: 'The Art of Silence', creator: 'UserE', collabs: 5 },
+    { title: 'The Power of Music', creator: 'UserF', collabs: 10 },
+    { title: 'Reflections on Water', creator: 'UserG', collabs: 8 },
+    { title: 'Life in the Desert', creator: 'UserH', collabs: 6 },
+    { title: 'Mysteries of the Deep Sea', creator: 'UserI', collabs: 11 },
+    { title: 'Forgotten Civilizations', creator: 'UserJ', collabs: 14 },
+  ]
 
   return (
     <main className="flex flex-col min-h-screen items-start justify-between p-12 bg-gray-100">
@@ -48,29 +139,46 @@ export default function Home() {
       </section>
 
       <section className="w-full flex mt-8 mb-8">
-        <div className="w-1/2 pr-2">
-          <h2 className="text-xl font-bold">🔥 Hot Stories </h2>
-          <ul>
-            {hotStories.map((story, index) => (
-              <li key={index}>{story}</li>
-            ))}
-          </ul>
-          <Link href="/stories">
-            <p className="btn btn-primary">View All</p>
-          </Link>
+      <div className="w-1/2 pr-2 ">
+  <h2 className="text-xl font-bold mb-4">🔥 Hot Stories </h2>
+  {hotStories.map((story, index) => (
+    <div key={index} className="card bg-white mb-4 flex items-start flex flex-row">
+      <img src={story.imageUrl} className="w-20 mr-4" alt={story.title} />
+      <div className='flex'>
+        <h3 className="font-bold mb-2">{story.title}</h3>
+        <p className="mb-2">{story.description}</p>
+        <div className="flex justify-between items-center">
+          <p className="text-sm text-gray-500">Collaborations: {story.collabs}</p>
+          <p className="text-sm text-red-500">{story.daysLeft} days left</p>
         </div>
+      </div>
+    </div>
+  ))}
+  <Link href="/stories">
+    <p className="btn btn-primary mt-4">View All</p>
+  </Link>
+</div>
+
 
         <div className="w-1/2 pl-2">
-          <h2 className="text-xl font-bold">New Theme List</h2>
-          <ul>
-            {newThemes.map((theme, index) => (
-              <li key={index}>{theme}</li>
-            ))}
-          </ul>
-          <Link href="/themes">
-            <p className="btn btn-primary">View All</p>
-          </Link>
-        </div>
+  <h2 className="text-xl font-bold mb-4">New Theme List</h2>
+  <div className="grid grid-cols-3 gap-4 text-sm font-semibold mb-2">
+    <p className="col-span-1">Theme</p>
+    <p className="col-span-1">Creator</p>
+    <p className="col-span-1">Collaborations</p>
+  </div>
+  {newThemes.map((theme, index) => (
+    <div key={index} className="grid grid-cols-3 gap-4 mb-2 cursor-pointer shadow hover:shadow-md">
+      <p className="col-span-1">{theme.title}</p>
+      <p className="col-span-1">{theme.creator}</p>
+      <p className="col-span-1">{theme.collabs}</p>
+    </div>
+  ))}
+  <Link href="/themes">
+    <p className="btn btn-primary mt-4">View All</p>
+  </Link>
+</div>
+
       </section>
       <footer className="w-full bg-gray-800 text-white py-8">
         <div className="container mx-auto px-6 md:px-12 flex flex-wrap justify-between items-center">
