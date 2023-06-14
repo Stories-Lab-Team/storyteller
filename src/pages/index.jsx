@@ -1,11 +1,16 @@
 import { useState } from 'react'
 import Link from 'next/link'
+
 export default function Home() {
   const [cards, setCards] = useState([
     { id: 1, title: 'Card 1', image: 'https://via.placeholder.com/150' },
     { id: 2, title: 'Card 2', image: 'https://via.placeholder.com/150' },
     { id: 3, title: 'Card 3', image: 'https://via.placeholder.com/150' },
   ])
+
+  // assuming hotStories and newThemes are arrays of data
+  const hotStories = ['Story 1', 'Story 2', 'Story 3']
+  const newThemes = ['Theme 1', 'Theme 2', 'Theme 3']
 
   return (
     <main className="flex flex-col min-h-screen items-start justify-between p-12 bg-gray-100">
@@ -33,11 +38,85 @@ export default function Home() {
           ))}
         </div>
       </section>
-
-      <footer className="w-full flex justify-center">
+      <section className="mt-4 mb-4 w-full min-w-screen flex flex-col justify-between items-center w-full mt-0 bg-blue-200 z-10">
+        {' '}
         <Link href="/dashboard">
-          <button className="btn btn-primary">Create</button>
+          <button className="m-4 bg-white rounded p-4">
+            Create on theme or bluesky
+          </button>
         </Link>
+      </section>
+
+      <section className="w-full flex mt-8 mb-8">
+        <div className="w-1/2 pr-2">
+          <h2 className="text-xl font-bold">🔥 Hot Stories </h2>
+          <ul>
+            {hotStories.map((story, index) => (
+              <li key={index}>{story}</li>
+            ))}
+          </ul>
+          <Link href="/stories">
+            <p className="btn btn-primary">View All</p>
+          </Link>
+        </div>
+
+        <div className="w-1/2 pl-2">
+          <h2 className="text-xl font-bold">New Theme List</h2>
+          <ul>
+            {newThemes.map((theme, index) => (
+              <li key={index}>{theme}</li>
+            ))}
+          </ul>
+          <Link href="/themes">
+            <p className="btn btn-primary">View All</p>
+          </Link>
+        </div>
+      </section>
+      <footer className="w-full bg-gray-800 text-white py-8">
+        <div className="container mx-auto px-6 md:px-12 flex flex-wrap justify-between items-center">
+          <div>
+            <h3 className="text-xl font-bold">Stories Lab</h3>
+            <p className="mt-2 text-sm">Creating and sharing unique stories</p>
+          </div>
+
+          <ul className="flex space-x-6">
+            <li>
+              <Link href="/about">
+                <p>About</p>
+              </Link>
+            </li>
+            <li>
+              <Link href="/contact">
+                <p>Contact</p>
+              </Link>
+            </li>
+            <li>
+              <Link href="/privacy">
+                <p>Privacy Policy</p>
+              </Link>
+            </li>
+            <li>
+              <Link href="/terms">
+                <p>Terms of Service</p>
+              </Link>
+            </li>
+          </ul>
+
+          <div>
+            <h3 className="text-xl font-bold">Follow us:</h3>
+            <div className="flex space-x-4 mt-2 ">
+              <li href="#" cllissNlime="text-xl">
+                <i className="fab fa-facebook"></i>
+              </li>
+              <div href="#" className="text-xl">
+                <li className="fab fa-twitter"></li>
+              </div>
+              <div href="#" className="text-xl">
+                <li className="fab fa-instagram"></li>
+              </div>
+            </div>
+          </div>
+        </div>
       </footer>
     </main>
   )
