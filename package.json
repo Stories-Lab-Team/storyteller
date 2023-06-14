@@ -15,7 +15,9 @@
     "next": "13.4.4",
     "nft.storage": "^7.1.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "viem": "0.3.50",
+    "wagmi": "1.0.9"
   },
   "devDependencies": {
     "autoprefixer": "10.4.14",
