@@ -139,46 +139,60 @@ export default function Home() {
       </section>
 
       <section className="w-full flex mt-8 mb-8">
-      <div className="w-1/2 pr-2 ">
-  <h2 className="text-xl font-bold mb-4">🔥 Hot Stories </h2>
-  {hotStories.map((story, index) => (
-    <div key={index} className="card bg-white mb-4 flex items-start flex flex-row">
-      <img src={story.imageUrl} className="w-20 mr-4" alt={story.title} />
-      <div className='flex'>
-        <h3 className="font-bold mb-2">{story.title}</h3>
-        <p className="mb-2">{story.description}</p>
-        <div className="flex justify-between items-center">
-          <p className="text-sm text-gray-500">Collaborations: {story.collabs}</p>
-          <p className="text-sm text-red-500">{story.daysLeft} days left</p>
+        <div className="w-1/2 pr-2 ">
+          <h2 className="text-xl font-bold mb-4">🔥 Hot Stories </h2>
+          {hotStories.map((story, index) => (
+            <Link href="/content">
+              <div
+                key={index}
+                className="card bg-white mb-4 flex items-start flex flex-row cursor-pointer"
+              >
+                <img
+                  src={story.imageUrl}
+                  className="w-20 mr-4"
+                  alt={story.title}
+                />
+                <div className="flex">
+                  <h3 className="font-bold mb-2">{story.title}</h3>
+                  <p className="mb-2">{story.description}</p>
+                  <div className="flex justify-between items-center">
+                    <p className="text-sm text-gray-500">
+                      Collaborations: {story.collabs}
+                    </p>
+                    <p className="text-sm text-red-500">
+                      {story.daysLeft} days left
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          ))}
+          <Link href="/stories">
+            <p className="btn btn-primary mt-4">View All</p>
+          </Link>
         </div>
-      </div>
-    </div>
-  ))}
-  <Link href="/stories">
-    <p className="btn btn-primary mt-4">View All</p>
-  </Link>
-</div>
-
 
         <div className="w-1/2 pl-2">
-  <h2 className="text-xl font-bold mb-4">New Theme List</h2>
-  <div className="grid grid-cols-3 gap-4 text-sm font-semibold mb-2">
-    <p className="col-span-1">Theme</p>
-    <p className="col-span-1">Creator</p>
-    <p className="col-span-1">Collaborations</p>
-  </div>
-  {newThemes.map((theme, index) => (
-    <div key={index} className="grid grid-cols-3 gap-4 mb-2 cursor-pointer shadow hover:shadow-md">
-      <p className="col-span-1">{theme.title}</p>
-      <p className="col-span-1">{theme.creator}</p>
-      <p className="col-span-1">{theme.collabs}</p>
-    </div>
-  ))}
-  <Link href="/themes">
-    <p className="btn btn-primary mt-4">View All</p>
-  </Link>
-</div>
-
+          <h2 className="text-xl font-bold mb-4">New Theme List</h2>
+          <div className="grid grid-cols-3 gap-4 text-sm font-semibold mb-2">
+            <p className="col-span-1">Theme</p>
+            <p className="col-span-1">Creator</p>
+            <p className="col-span-1">Collaborations</p>
+          </div>
+          {newThemes.map((theme, index) => (
+            <div
+              key={index}
+              className="grid grid-cols-3 gap-4 mb-2 cursor-pointer shadow hover:shadow-md"
+            >
+              <p className="col-span-1">{theme.title}</p>
+              <p className="col-span-1">{theme.creator}</p>
+              <p className="col-span-1">{theme.collabs}</p>
+            </div>
+          ))}
+          <Link href="/themes">
+            <p className="btn btn-primary mt-4">View All</p>
+          </Link>
+        </div>
       </section>
       <footer className="w-full bg-gray-800 text-white py-8">
         <div className="container mx-auto px-6 md:px-12 flex flex-wrap justify-between items-center">

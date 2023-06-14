@@ -6,7 +6,7 @@ export default function Navbar() {
     <nav className="navbar bg-base-100 flex justify-between items-center p-4">
       <div>
         <Link href="/">
-          <h1 className="font-bold text-xl">Stories Lab</h1>
+          <h1 className="font-bold text-xl">Storytellers</h1>
         </Link>
       </div>
 
