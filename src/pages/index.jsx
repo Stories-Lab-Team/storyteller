@@ -228,7 +228,7 @@ export default function Home() {
       <footer className="w-full bg-gray-800 text-white py-8">
         <div className="container mx-auto px-6 md:px-12 flex flex-wrap justify-between items-center">
           <div>
-            <h3 className="text-xl font-bold">Stories Lab</h3>
+            <h3 className="text-xl font-bold">Storytellers</h3>
             <p className="mt-2 text-sm">Creating and sharing unique stories</p>
           </div>
 

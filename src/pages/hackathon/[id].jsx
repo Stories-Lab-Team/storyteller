@@ -50,6 +50,10 @@ export default function Hackathon() {
       </ul>
       <h3 className="font-semibold mt-4">Media:</h3>
       <p>{hackathon.media}</p>
+      <button className='btn'>Bid and apply</button>
+      <button className='btn'>Suggest</button>
+      <button className='btn'>Support</button>
+      <button className='btn'>Refer to others</button>
     </div>
   )
 }
