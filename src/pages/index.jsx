@@ -3,9 +3,30 @@ import Link from 'next/link'
 
 export default function Home() {
   const [cards, setCards] = useState([
-    { id: 1, title: 'Card 1', image: 'https://via.placeholder.com/150' },
-    { id: 2, title: 'Card 2', image: 'https://via.placeholder.com/150' },
-    { id: 3, title: 'Card 3', image: 'https://via.placeholder.com/150' },
+    {
+      id: 1,
+      title: 'Cyberpunk Future',
+      description:
+        'A futuristic theme revolving around AI, robotics, life, action, and love. Looking for storywriters, artists, composers, animators. Open to suggestions.',
+      image: 'https://via.placeholder.com/150',
+      media: 'Manga / Visual Novels',
+    },
+    {
+      id: 2,
+      title: 'Educational Biology & Genetics',
+      description:
+        'Making biology fun and easy to understand. Media open to suggestions.',
+      image: 'https://via.placeholder.com/150',
+      media: 'Open to suggestions',
+    },
+    {
+      id: 3,
+      title: 'Fantasy Mythology',
+      description:
+        'A fantasy series based on existing myths. Looking for suggestions and collaboration to kick off as independent series.',
+      image: 'https://via.placeholder.com/150',
+      media: 'Open to suggestions',
+    },
   ])
 
   //hotStories and newThemes
@@ -113,17 +134,26 @@ export default function Home() {
           {cards.map((card) => (
             <div
               key={card.id}
-              className="bg-white shadow-md m-4 p-4 rounded-md flex  md:flex-row items-start"
+              className="bg-white shadow-md m-4 p-4 rounded-md flex  md:flex-row items-start space-between w-1/3"
             >
               <img
                 src={card.image}
-                className="m-4 rounded-md w-50 h-auto flex-shrink-0"
+                className="m-4 rounded-md w-50 h-auto "
               ></img>
-              <div className="flex flex-col items-start ml-4">
+              <div className="flex flex-col items-start">
                 <h2 className="text-lg font-semibold mb-2">{card.title}</h2>
-                <p className="mb-2">Card content goes here...</p>
-                <span className="text-sm text-gray-500 mb-2">#Tag1 #Tag2</span>
-                <button className="btn btn-primary">Join</button>
+                <p
+                  className="mb-2 flex-wrap"
+                  style={{ height: '50px', overflow: 'hidden' }}
+                >
+                  {card.description}
+                </p>
+                <span className="text-sm text-gray-500 mb-2">
+                  #{card.media}
+                </span>
+                <Link href={`/hackathon/${card.id}`}>
+                  <button className="btn btn-primary">Detail ▶</button>
+                </Link>
               </div>
             </div>
           ))}
