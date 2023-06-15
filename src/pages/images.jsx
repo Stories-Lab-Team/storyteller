@@ -8,6 +8,7 @@ import {
 } from '@/helpers/general_helper_functions'
 import { INITIAL_TRANSACTION_STATE } from '@/helpers/consts'
 import { errorMsg, genericMsg, loadingMsg } from '@/helpers/messages'
+import { ImagePreview } from '@/components/ImagePreview'
 
 export default function Images() {
   const [bacalhauImages, setBacalhauImages] = React.useState([])
@@ -83,7 +84,7 @@ export default function Images() {
           .then((imageIPFS) => {
             console.log(imageIPFS)
             nftJSON = {
-              name: 'Bacalhau Hyperspace NFTs 2023',
+              name: 'Stories Lab NFTs 2023',
               description: promptInput,
               image: imageData, // Blob
               properties: {
@@ -108,9 +109,25 @@ export default function Images() {
 
   return (
     <main className="flex min-h-screen flex-col items-center p-24">
+      {!status.loading && status !== INITIAL_TRANSACTION_STATE && (
+        <div className="alert">
+          <span>
+            {status.error
+              ? status.error
+              : status.success
+              ? status.success
+              : status.warning}
+          </span>
+        </div>
+      )}
+      {status.loading && (
+        <div className="alert">
+          <span>{status.loading}</span>
+        </div>
+      )}
       {bacalhauImages.length > 0 && (
         <>
-          <img images={bacalhauImages[0]} mode="bacalhau" />
+          <ImagePreview images={bacalhauImages} mode="bacalhau" />
         </>
       )}
       <PromptInput prompt={prompt} setPrompt={setPrompt}>
