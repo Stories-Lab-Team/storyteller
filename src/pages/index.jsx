@@ -124,39 +124,48 @@ export default function Home() {
     { title: 'Forgotten Civilizations', creator: 'UserJ', collabs: 14 },
   ]
 
-  const images = [
-    'starship.png',
-    'myth.png',
-    'japan.png',
-    'drama.png',
-  ];
+  const images = ['starship.png', 'myth.png', 'japan.png', 'drama.png']
 
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(0)
+
+  // Image preloading
+  useEffect(() => {
+    images.forEach((image) => {
+      new Image().src = image
+    })
+  }, [])
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setIndex((current) => (current + 1) % images.length);
-    }, 5000); // changes every 5 secs
+      setIndex((current) => (current + 1) % images.length)
+    }, 5000) // changes every 5 secs
 
-    return () => clearInterval(timer); // cleanup on unmount
-  }, []);
+    return () => clearInterval(timer) // cleanup on unmount
+  }, [])
   return (
     <>
       {' '}
       {/* Hero Section */}
-      <section
-      className="w-full h-80 text-center bg-cover bg-center  text-white flex items-center justify-center"
-      style={{
-        backgroundImage: `url(${images[index]})`,
-        transition: 'background-image 1s ease-in-out',
-        backgroundColor: '#f9fafb', 
-        backgroundBlendMode: 'multiply' // blend mode
-      }}
-    >
-      <h1 className="text-3xl font-bold my-4">Storytellers, Unite!</h1>
-      <p className="text-xl">Fuse your imaginations...</p>
-    </section>
+      <section className="relative w-full h-96 text-center text-white flex items-center justify-center">
+        {images.map((image, i) => (
+          <div
+            key={image}
+            className={`absolute w-full h-full bg-cover bg-center transition-opacity duration-1000 ${
+              index === i ? 'opacity-100' : 'opacity-0'
+            }`}
+            style={{
+              backgroundImage: `url(${image})`,
+              backgroundColor: '#f9fafb',
+              backgroundBlendMode: 'multiply',
+            }}
+          />
+        ))}
 
+        <div className="relative z-10">
+          <h1 className="text-3xl font-bold my-4">Storytellers, Unite!</h1>
+          <p className="text-xl">Fuse your imaginations...</p>
+        </div>
+      </section>
       <main className="flex flex-col min-h-screen items-start justify-between p-12 bg-gray-950">
         <section className="flex flex-col justify-start w-full mt-0">
           <h1 className="text-2xl text-white font-bold mb-0 flex flex-col">
@@ -191,7 +200,7 @@ export default function Home() {
             ))}
           </div>
         </section>
-        <section className="mt-4 mb-4 w-full min-w-screen flex flex-col justify-between items-center w-full mt-0 bg-blue-200 z-10">
+        <section className="mt-4 mb-4 w-full min-w-screen flex flex-col justify-between items-center w-full mt-0 bg-gray-900 z-10">
           {' '}
           <Link href="/dashboard">
             <button className="m-4 bg-white rounded p-4">
