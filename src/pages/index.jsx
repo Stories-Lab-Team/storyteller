@@ -209,8 +209,8 @@ export default function Home() {
           </Link>
         </section>
 
-        <section className="w-full flex mt-8 mb-8">
-          <div className="w-1/2 pr-2 ">
+        <section className="w-full flex mt-16 mb-8 ">
+          <div className="w-1/2 pr-2 mr-8">
             <h2 className="text-xl font-bold text-white mb-4">
               🔥 Hot Stories{' '}
             </h2>
@@ -241,11 +241,11 @@ export default function Home() {
               </Link>
             ))}
             <Link href="/stories">
-              <p className="btn btn-primary mt-4">View All</p>
+              <p className="btn border-primary text-gray-200 bg-transparent mt-4">View All</p>
             </Link>
           </div>
 
-          <div className="w-1/2 pl-2">
+          <div className="w-1/2 pl-2 ml-8">
             <h2 className="text-xl   text-white font-bold mb-4">
               🆕 New Theme List
             </h2>

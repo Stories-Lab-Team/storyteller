@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export default function Navbar() {
   return (
-    <nav className="navbar bg-gray-950 flex justify-between items-center p-4 ">
+    <nav className="navbar bg-gray-950 flex justify-between items-center p-8 ">
       <div>
         <Link href="/">
           <h1 className="font-bold text-xl text-white ">Storytellers</h1>
