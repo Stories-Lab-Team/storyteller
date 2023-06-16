@@ -5,7 +5,7 @@ export default function Home() {
   const [cards, setCards] = useState([
     {
       id: 1,
-      title: 'Cyberpunk Future',
+      title: 'Make Cyberpunk Story Collections',
       description:
         'A futuristic theme revolving around AI, robotics, life, action, and love. Looking for storywriters, artists, composers, animators. Open to suggestions.',
       image: 'https://via.placeholder.com/150',
@@ -13,7 +13,7 @@ export default function Home() {
     },
     {
       id: 2,
-      title: 'Educational Biology & Genetics',
+      title: 'Make Educational Biology & Genetics Fun to Learn',
       description:
         'Making biology fun and easy to understand. Media open to suggestions.',
       image: 'https://via.placeholder.com/150',
@@ -21,7 +21,7 @@ export default function Home() {
     },
     {
       id: 3,
-      title: 'Fantasy Mythology',
+      title: 'Fantasy Mythology: Bring Myths and Make New Series',
       description:
         'A fantasy series based on existing myths. Looking for suggestions and collaboration to kick off as independent series.',
       image: 'https://via.placeholder.com/150',
@@ -125,9 +125,32 @@ export default function Home() {
   ]
 
   return (
-    <main className="flex flex-col min-h-screen items-start justify-between p-12 bg-gray-100">
+    <main className="flex flex-col min-h-screen items-start justify-between p-12 bg-gray-950">
+
+
+           {/* Hero Section */}
+           <section className="w-full mb-12 text-center">
+  <div
+    style={{
+      backgroundImage: "url('starship.png')",
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      height: '300px',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      color: '#ffffff',
+    }}
+    className="rounded-lg"
+  >
+
+          <h1 className="text-3xl font-bold my-4">Storytellers, Unite!</h1>
+          <p className="text-xl">Fuse your imaginations, tell old and new stories, join creative hackathons and expand your possibilities.</p>
+        </div>
+      </section>
       <section className="flex flex-col justify-start w-full mt-0">
-        <h1 className="text-2xl font-bold mb-0 flex flex-col">
+        <h1 className="text-2xl text-white font-bold mb-0 flex flex-col">
           Open Challenges
         </h1>
         <div className="flex-row flex">
@@ -170,7 +193,7 @@ export default function Home() {
 
       <section className="w-full flex mt-8 mb-8">
         <div className="w-1/2 pr-2 ">
-          <h2 className="text-xl font-bold mb-4">🔥 Hot Stories </h2>
+          <h2 className="text-xl font-bold text-white mb-4">🔥 Hot Stories </h2>
           {hotStories.map((story, index) => (
             <Link href="/content">
               <div
@@ -203,7 +226,7 @@ export default function Home() {
         </div>
 
         <div className="w-1/2 pl-2">
-          <h2 className="text-xl font-bold mb-4">🆕 New Theme List</h2>
+          <h2 className="text-xl   text-white font-bold mb-4">🆕 New Theme List</h2>
           <div className="grid grid-cols-3 gap-4 text-sm font-semibold mb-2">
             <p className="col-span-1">Theme</p>
             <p className="col-span-1">Collaborations</p>
@@ -212,7 +235,7 @@ export default function Home() {
           {newThemes.map((theme, index) => (
             <div
               key={index}
-              className="grid grid-cols-3 gap-6 mb-2 p-2 cursor-pointer shadow hover:shadow-md"
+              className="text-white grid grid-cols-3 gap-6 mb-2 p-2 cursor-pointer shadow hover:shadow-md"
             >
               <p className="col-span-1">{theme.title}</p>
 
@@ -228,11 +251,11 @@ export default function Home() {
       <footer className="w-full bg-gray-800 text-white py-8">
         <div className="container mx-auto px-6 md:px-12 flex flex-wrap justify-between items-center">
           <div>
-            <h3 className="text-xl font-bold">Storytellers</h3>
+            <h3 className="text-xl  text-white font-bold">Storytellers</h3>
             <p className="mt-2 text-sm">Creating and sharing unique stories</p>
           </div>
 
-          <ul className="flex space-x-6">
+          <ul className="flex space-x-6 text-white">
             <li>
               <Link href="/about">
                 <p>About</p>
