@@ -1,12 +1,36 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 import Link from 'next/link'
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { ethers } from "ethers";
 
 export default function Navbar() {
+  const [resolveENSname, setResolveENSname] = useState('');
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [dropdownTwoOpen, setDropdownTwoOpen] = useState(false);
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
   const toggleDropdownTwo = () => setDropdownTwoOpen(!dropdownOpen);
+
+  useEffect(() => {
+    getESNResolve()
+  },[])
+  const getESNResolve = async () => {
+    const { ethereum } = window
+    if (ethereum) {
+      const provider = new ethers.providers.Web3Provider(ethereum)
+      await provider.send('eth_requestAccounts', [])
+      const signer = provider.getSigner()
+      // const address = await signer.getAddress()
+      const address = "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045"
+      const ens = await provider.lookupAddress(address)
+      if (ens !== null) {
+        setResolveENSname(ens)
+      }
+    } else {
+      alert('no wallet detected!')
+    }
+  }
+
+
   return (
     <nav className="navbar bg-gray-950 flex justify-between items-center p-8 ">
       <div>
@@ -25,7 +49,7 @@ export default function Navbar() {
         <Link href="/challenges">
           <li className="mr-4">Challenges</li>
         </Link>
-        
+
         <li className="relative cursor-pointer">
         <div onClick={toggleDropdown} className="mr-4 text-bold">
           Post
@@ -43,7 +67,7 @@ export default function Navbar() {
                  Hackathon
                 </li>
               </Link>
-            
+
             </div>
           </div>
         )}
@@ -55,7 +79,7 @@ export default function Navbar() {
         {dropdownTwoOpen && (
           <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
             <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-              
+
               <Link href="/create/story-self">
                 <li className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
                   Story by Yourself
@@ -70,6 +94,7 @@ export default function Navbar() {
           </div>
         )}
       </li>
+      <li className="ml-2 mr-4">{resolveENSname}</li>
         <ConnectButton />
       </nav>
     </nav>
