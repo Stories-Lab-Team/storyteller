@@ -26,3 +26,27 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.button-shine {
+  position: relative;
+  overflow: hidden;
+  transform: translate3d(0, 0, 0);
+}
+
+.button-shine:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -50%;
+  width: 30%;
+  height: 100%;
+  background: rgba(119, 27, 92, 0.2);
+  transform: skewX(-20deg);
+  transition: 0.7s ease-in-out;
+  pointer-events: none;
+}
+
+.button-shine:hover:after {
+  right: 120%;
+  transition: 0.7s ease-in-out;
+}

@@ -193,7 +193,7 @@ export default function Home() {
                     #{card.media}
                   </span>
                   <Link href={`/hackathon/${card.id}`}>
-                    <button className="btn btn-primary">Detail ▶</button>
+                    <button className="btn text-gray-500 bg-gray-950 button-shine">Detail ▶</button>
                   </Link>
                 </div>
               </div>
@@ -203,7 +203,7 @@ export default function Home() {
         <section className="mt-4 mb-4 w-full min-w-screen flex flex-col justify-between items-center w-full mt-0 bg-gray-900 z-10">
           {' '}
           <Link href="/dashboard">
-            <button className="m-4 bg-white rounded p-4">
+            <button className="m-4 bg-white rounded p-4 button-shine">
               Create on theme or bluesky
             </button>
           </Link>
