@@ -171,6 +171,7 @@ export default function Home() {
           <h1 className="text-2xl text-white font-bold mb-0 flex flex-col">
             Open Challenges
           </h1>
+          <h2 className='text-white'>Creathon<span className='text-white'> (What is Creathon?)</span></h2>
           <div className="flex-row flex">
             {cards.map((card) => (
               <div
