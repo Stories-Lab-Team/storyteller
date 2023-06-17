@@ -1,5 +1,5 @@
 import { useState } from 'react'
-
+import Canvas from '@/components/Canvas'
 export default function Dashboard() {
   const [theme, setTheme] = useState('Selected Theme')
   const [story, setStory] = useState('')
@@ -55,6 +55,7 @@ export default function Dashboard() {
 
   return (
     <main className="flex flex-col items-center p-12 bg-gray-100 min-h-screen">
+      <Canvas className="w-1/2 flex flex-col"></Canvas>
       <div>
         <button onClick={() => handleProjectTypeChange('individual')}>
           Individual Project
@@ -101,6 +102,8 @@ export default function Dashboard() {
       <button className="btn btn-primary" onClick={handleCreate}>
         Create NFT
       </button>
+
+      
     </main>
   )
 }
