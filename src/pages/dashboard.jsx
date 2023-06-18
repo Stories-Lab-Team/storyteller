@@ -55,7 +55,7 @@ export default function Dashboard() {
     <main className="flex flex-col items-center p-12 bg-gray-100 min-h-screen">
       <div>
         <button onClick={() => handleProjectTypeChange('individual')}>
-          Individual Project
+          Individual Project |
         </button>
         <button onClick={() => handleProjectTypeChange('group')}>
           Group Project
@@ -63,16 +63,16 @@ export default function Dashboard() {
       </div>
       <div>
         <button onClick={() => handleComponentToggle('writing')}>
-          Toggle Writing Component
+          Writing Component |
         </button>
         <button onClick={() => handleComponentToggle('imageGen')}>
-          Toggle Image Generator
+          Image Generator |
         </button>
         <button onClick={() => handleComponentToggle('mangaTemplate')}>
-          Toggle Manga Template
+          Manga Template
         </button>
       </div>
-      // Show/Hide components based on state
+   
       {components.writing && <WritingComponent />}
       {components.imageGen && <ImageGenerator />}
       {components.mangaTemplate && <MangaTemplate />}

@@ -45,45 +45,15 @@ export default function Navbar() {
         <Link href="/">
           <li className="mr-4">Home</li>
         </Link>
-        <Link href="/stories">
+        <Link href="/content">
           <li className="mr-4">Stories</li>
         </Link>
-        <Link href="/challenges">
+        <Link href="/create/theme">
           <li className="mr-4">Challenges</li>
         </Link>
+        
 
-        <li className="relative cursor-pointer">
-          <div onClick={toggleDropdown} className="mr-4 text-bold">
-            Post
-          </div>
-          {dropdownOpen && (
-            <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
-              <div
-                className="py-1"
-                role="menu"
-                aria-orientation="vertical"
-                aria-labelledby="options-menu"
-              >
-                <Link href="/create/theme">
-                  <li
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    role="menuitem"
-                  >
-                    Theme
-                  </li>
-                </Link>
-                <Link href="/create/story-self">
-                  <li
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    role="menuitem"
-                  >
-                    Hackathon
-                  </li>
-                </Link>
-              </div>
-            </div>
-          )}
-        </li>
+    
         <li className="relative cursor-pointer">
           <div onClick={toggleDropdownTwo} className="mr-4 text-bold">
             Create
@@ -96,7 +66,7 @@ export default function Navbar() {
                 aria-orientation="vertical"
                 aria-labelledby="options-menu"
               >
-                <Link href="/create/story-self">
+                <Link href="/dashboard">
                   <li
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     role="menuitem"
@@ -104,7 +74,7 @@ export default function Navbar() {
                     Story by Yourself
                   </li>
                 </Link>
-                <Link href="/create/story-group">
+                <Link href="/dashboard">
                   <li
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     role="menuitem"
