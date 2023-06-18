@@ -29,7 +29,7 @@ export const ImagePreview = ({
         }
         return (
           <div key={x} className="flex flex-col justify-center">
-            <ImageLayout src={link} alt={item.name} data={item} />
+            <ImageLayout src={link} alt={item.name} data={item}  />
             {children}
           </div>
         )
