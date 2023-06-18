@@ -3,8 +3,11 @@ import { ConnectButton } from '@rainbow-me/rainbowkit'
 import Link from 'next/link'
 import { useState } from 'react'
 import { ethers } from 'ethers'
+import { useAccount } from 'wagmi';
 
 export default function Navbar() {
+  const { address } = useAccount();
+
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const [resolveENSname, setResolveENSname] = useState('')
   const [dropdownTwoOpen, setDropdownTwoOpen] = useState(false)
@@ -13,18 +16,19 @@ export default function Navbar() {
 
 
   useEffect(() => {
-    // getESNResolve()
+    getESNResolve()
   }, [])
 
   const getESNResolve = async () => {
     const { ethereum } = window
     if (ethereum) {
-      const provider = new ethers.providers.Web3Provider(ethereum)
-      await provider.send('eth_requestAccounts', [])
-      const signer = provider.getSigner()
+      const provider = new ethers.providers.JsonRpcProvider(
+        'https://rpc.ankr.com/eth_goerli',
+        'goerli'
+      )
       // const address = await signer.getAddress()
-      const address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'
       const ens = await provider.lookupAddress(address)
+      console.log(ens)
       if (ens !== null) {
         setResolveENSname(ens)
       }
@@ -32,6 +36,7 @@ export default function Navbar() {
       alert('no wallet detected!')
     }
   }
+
 
   return (
     <nav className="navbar bg-gray-950 flex justify-between items-center p-8 ">
@@ -51,9 +56,9 @@ export default function Navbar() {
         <Link href="/create/theme">
           <li className="mr-4">Challenges</li>
         </Link>
-        
 
-    
+
+
         <li className="relative cursor-pointer">
           <div onClick={toggleDropdownTwo} className="mr-4 text-bold">
             Create
