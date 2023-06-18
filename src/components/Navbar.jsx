@@ -1,12 +1,37 @@
+import { useEffect } from 'react'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 import Link from 'next/link'
 import { useState } from 'react'
+import { ethers } from 'ethers'
 
 export default function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false)
+  const [resolveENSname, setResolveENSname] = useState('')
   const [dropdownTwoOpen, setDropdownTwoOpen] = useState(false)
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen)
   const toggleDropdownTwo = () => setDropdownTwoOpen(!dropdownOpen)
+
+  useEffect(() => {
+    getESNResolve()
+  }, [])
+
+  const getESNResolve = async () => {
+    const { ethereum } = window
+    if (ethereum) {
+      const provider = new ethers.providers.Web3Provider(ethereum)
+      await provider.send('eth_requestAccounts', [])
+      const signer = provider.getSigner()
+      // const address = await signer.getAddress()
+      const address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'
+      const ens = await provider.lookupAddress(address)
+      if (ens !== null) {
+        setResolveENSname(ens)
+      }
+    } else {
+      alert('no wallet detected!')
+    }
+  }
+
   return (
     <nav className="navbar bg-gray-950 flex justify-between items-center p-8 ">
       <div>
@@ -90,6 +115,7 @@ export default function Navbar() {
             </div>
           )}
         </li>
+        <li className="ml-2 mr-4">{resolveENSname}</li>
         <ConnectButton />
       </nav>
     </nav>

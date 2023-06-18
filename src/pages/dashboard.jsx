@@ -23,8 +23,6 @@ export default function Dashboard() {
   const handleCreate = async () => {
     console.log('Creating NFT...')
 
-
-
     // connect to the user's wallet
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     const signer = provider.getSigner()
@@ -55,7 +53,6 @@ export default function Dashboard() {
 
   return (
     <main className="flex flex-col items-center p-12 bg-gray-100 min-h-screen">
-      <Canvas className="w-1/2 flex flex-col"></Canvas>
       <div>
         <button onClick={() => handleProjectTypeChange('individual')}>
           Individual Project
@@ -99,11 +96,10 @@ export default function Dashboard() {
           <p>{story}</p>
         </div>
       )}
+      <Canvas className="w-1/2 flex flex-col"></Canvas>
       <button className="btn btn-primary" onClick={handleCreate}>
         Create NFT
       </button>
-
-      
     </main>
   )
 }

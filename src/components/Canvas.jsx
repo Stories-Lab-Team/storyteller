@@ -1,41 +1,36 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { fabric } from 'fabric';
 
 function Canvas() {
-    
-  const [canvasSize, setCanvasSize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight,
-  });
-
   useEffect(() => {
     let canvas = new fabric.Canvas('canvas', {
-      width: canvasSize.width,
-      height: canvasSize.height,
+      width: window.innerWidth,
+      height: window.innerHeight,
     });
 
-    let frame = new fabric.Rect({
-      left: 100,
-      top: 100,
-      fill: 'white',
-      width: 900,
-      height: 400,
-      stroke: 'black',
-      strokeWidth: 3,
-    });
+    for(let i=0; i<3; i++) { // Loop 3 times to create 3 frames and texts
+      let leftPos = 100 + (i * 300); // Position each frame 300px apart
 
-    canvas.add(frame);
-    
-    let text = new fabric.IText('Tap and Type', {
-        left: 100,
-        top: 100
+      let frame = new fabric.Rect({
+        left: leftPos,
+        top: 100,
+        fill: 'white',
+        width: 200,
+        height: 100,
+        stroke: 'black',
+        strokeWidth: 3,
       });
-    canvas.add(text);
 
-    fabric.Image.fromURL('path/to/image.jpg', function(img) {
-      // add image onto canvas
-      canvas.add(img);
-    });
+      canvas.add(frame);
+    
+      let text = new fabric.IText('Tap and Type', {
+          left: leftPos,
+          top: 100
+      });
+      
+      canvas.add(text);
+      canvas.bringToFront(text); // This brings the text object to the front
+    }
 
     fabric.Image.fromURL('path/to/image.jpg', function(img) {
       // add image onto canvas
@@ -49,25 +44,9 @@ function Canvas() {
       format: 'png',
       quality: 0.8
     });
-
-    const handleResize = () => {
-      setCanvasSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-      canvas.setWidth(window.innerWidth);
-      canvas.setHeight(window.innerHeight);
-      canvas.renderAll();
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-                  
   }, []);
 
-  return (
-    <canvas id="canvas" width={canvasSize.width} height={canvasSize.height} />
-  );
+  return <canvas id="canvas" />;
 }
 
 export default Canvas;
