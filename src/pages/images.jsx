@@ -9,8 +9,12 @@ import {
 import { INITIAL_TRANSACTION_STATE } from '@/helpers/consts'
 import { errorMsg, genericMsg, loadingMsg } from '@/helpers/messages'
 import { ImagePreview } from '@/components/ImagePreview'
+import { useAccount } from 'wagmi'
+import { getContractConnection } from '@/helpers/contract_helper_functions'
 
 export default function Images() {
+  const { address, isConnected } = useAccount()
+
   const [bacalhauImages, setBacalhauImages] = React.useState([])
   const [prompt, setPrompt] = React.useState()
   const [status, setStatus] = React.useState(INITIAL_TRANSACTION_STATE)
@@ -111,7 +115,7 @@ export default function Images() {
   const saveToNFTStorage = async (nftJson) => {
     //check wallet connection first
     // TODO: move these functions to a generic call
-    if (userWallet.accounts.length < 1) {
+    if (!isConnected) {
       setStatus({
         ...status,
         warning: genericMsg(
@@ -120,15 +124,6 @@ export default function Images() {
         ),
       })
       return
-    }
-    if (userWallet.chainId || userWallet.chainId !== '0x4CB2F') {
-      await changeWalletChain('0x4CB2F').catch((err) => {
-        setStatus({
-          ...INITIAL_TRANSACTION_STATE,
-          error: errorMsg(err, 'Couldnt change chain to calibration'),
-        })
-        return
-      })
     }
 
     setStatus({
@@ -163,7 +158,7 @@ export default function Images() {
     if (contract) {
       await contract
         .mintBacalhauNFT(
-          userWallet.accounts[0],
+          address,
           metadata.url //test ipfs address
         )
         .then(async (data) => {
@@ -228,6 +223,14 @@ export default function Images() {
       {bacalhauImages.length > 0 && (
         <>
           <ImagePreview images={bacalhauImages} mode="bacalhau" />
+
+          {!bacalhauImages[0].minted && (
+            <PromptButton
+              text="Mint NFT!"
+              disabled={Boolean(status.loading)}
+              action={() => saveToNFTStorage(bacalhauImages[0])}
+            />
+          )}
         </>
       )}
       <PromptInput prompt={prompt} setPrompt={setPrompt}>
@@ -237,14 +240,6 @@ export default function Images() {
           disabled={Boolean(status.loading) || !Boolean(prompt)}
           text="Generate Image"
         />
-
-        {!bacalhauImages[0].minted && (
-          <PromptButton
-            text={'Mint NFT!'}
-            disabled={Boolean(status.loading)}
-            action={() => saveToNFTStorage(bacalhauImages[0])}
-          />
-        )}
       </PromptInput>
     </main>
   )

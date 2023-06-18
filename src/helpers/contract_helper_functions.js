@@ -1,7 +1,7 @@
 import { ethers } from 'ethers'
 import BacalhauCompiledContract from '../../../stoires-lab-contracts/out/StoryTellerFRC721.sol/StoryTellerFRC721.json'
 import { INITIAL_WALLET_STATUS } from './consts'
-import { genericMsg, successMintingNFTmsg } from '../messages'
+import { genericMsg, successMintingNFTmsg } from './messages'
 
 const contractAddressHyperspace =
   process.env.NEXT_PUBLIC_BACALHAUFRC721_CONTRACT_ADDRESS || ''
