@@ -1,18 +1,15 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { fabric } from 'fabric';
 
 function Canvas() {
-  const fileInputRef = useRef();
-  const canvasRef = useRef();
-
   useEffect(() => {
-    const canvas = new fabric.Canvas(canvasRef.current, {
+    let canvas = new fabric.Canvas('canvas', {
       width: window.innerWidth,
       height: window.innerHeight,
     });
 
-    for (let i = 0; i < 3; i++) {
-      let leftPos = 100 + i * 300;
+    for(let i=0; i<3; i++) { // Loop 3 times to create 3 frames and texts
+      let leftPos = 100 + (i * 300); // Position each frame 300px apart
 
       let frame = new fabric.Rect({
         left: leftPos,
@@ -25,53 +22,31 @@ function Canvas() {
       });
 
       canvas.add(frame);
-      frame.on('mousedown', (event) => {
-        event.stopPropagation();
-      });
-
+    
       let text = new fabric.IText('Tap and Type', {
-        left: leftPos,
-        top: 100,
+          left: leftPos,
+          top: 100
       });
-
+      
       canvas.add(text);
-      text.on('mousedown', (event) => {
-        event.stopPropagation();
-      });
-      canvas.bringToFront(text);
+      canvas.bringToFront(text); // This brings the text object to the front
     }
 
-    return () => {
-      canvas.getObjects().forEach((object) => {
-        object.off('mousedown');
-      });
-    };
+    fabric.Image.fromURL('path/to/image.jpg', function(img) {
+      // add image onto canvas
+      canvas.add(img);
+    });
+
+    let json = canvas.toJSON();
+    canvas.loadFromJSON(json);
+
+    let dataUrl = canvas.toDataURL({
+      format: 'png',
+      quality: 0.8
+    });
   }, []);
 
-  const handleImageUpload = (event) => {
-    let reader = new FileReader();
-
-    reader.onload = function (event) {
-      fabric.Image.fromURL(event.target.result, function (img) {
-        img.set({
-          left: 100,
-          top: 100,
-          selectable: false,
-        });
-        canvasRef.current.add(img);
-        canvasRef.current.renderAll();
-      });
-    };
-
-    reader.readAsDataURL(event.target.files[0]);
-  };
-
-  return (
-    <div>
-      <input type="file" ref={fileInputRef} onChange={handleImageUpload} />
-      <canvas ref={canvasRef} />
-    </div>
-  );
+  return <canvas id="canvas" />;
 }
 
 export default Canvas;
