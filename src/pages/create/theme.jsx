@@ -4,7 +4,11 @@ import ImageGenerator from '../../components/ImageGenerator';
 export default function ThemeMaker() {
     const [themeText, setThemeText] = useState('');
     const [anonymous, setAnonymous] = useState(false);
-  
+  const [image, showImage]=useState('')
+
+  function show(){
+    showImage("/hacker.png")
+    }
     const handleTextChange = (event) => {
       setThemeText(event.target.value);
     };
@@ -36,7 +40,9 @@ export default function ThemeMaker() {
             placeholder="Enter your theme text here..." 
           />
           <div className="flex-shrink-0 w-1/3 h-48">
-            <ImageGenerator />
+            <input placeholder='input your image description'></input>
+            <button onClick={show}>Show</button>
+            <img src={image}></img>
           </div>
         </div>
         <button className="btn btn-primary flex" onClick={handlePostTheme}>
@@ -45,5 +51,5 @@ export default function ThemeMaker() {
       </div>
     );
   }
-  
+
   
