@@ -1,3 +1,10 @@
+export const INITIAL_WALLET_STATUS = {
+  injectedeth: false,
+  accounts: [],
+  chainId: null,
+  message: '',
+}
+
 export const INITIAL_TRANSACTION_STATE = {
   loading: '',
   error: '',
@@ -17,5 +24,9 @@ export const blockExplorerRoots = {
     'https://explorer.glif.io/?network=hyperspacenet',
     'https://beryx.zondax.ch/',
     'https://hyperspace.filfox.info/en',
+  ],
+  calibration: [
+    'https://calibration.filscout.com/en',
+    'https://calibration.filscan.io/',
   ],
 }

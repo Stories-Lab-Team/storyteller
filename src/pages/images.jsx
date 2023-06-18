@@ -107,6 +107,106 @@ export default function Images() {
     return nftJSON
   }
 
+  // Store NFT Metadata to NFT.Storage
+  const saveToNFTStorage = async (nftJson) => {
+    //check wallet connection first
+    // TODO: move these functions to a generic call
+    if (userWallet.accounts.length < 1) {
+      setStatus({
+        ...status,
+        warning: genericMsg(
+          'No wallet connection',
+          'Connect your wallet to Mint an NFT!'
+        ),
+      })
+      return
+    }
+    if (userWallet.chainId || userWallet.chainId !== '0x4CB2F') {
+      await changeWalletChain('0x4CB2F').catch((err) => {
+        setStatus({
+          ...INITIAL_TRANSACTION_STATE,
+          error: errorMsg(err, 'Couldnt change chain to calibration'),
+        })
+        return
+      })
+    }
+
+    setStatus({
+      ...status,
+      loading: loadingMsg('Saving Metadata to NFT.Storage....'),
+    })
+
+    await NFTStorageClient.store(nftJson)
+      .then((metadata) => {
+        console.log('NFT Data pinned to IPFS & stored on Filecoin!')
+        console.log('Metadata URI: ', metadata.url)
+        mintNFT(metadata)
+      })
+      .catch((err) => {
+        console.log('error uploading to nft.storage')
+        setStatus({
+          ...INITIAL_TRANSACTION_STATE,
+          error: errorMsg(err, 'Error saving to NFT.Storage'),
+        })
+      })
+  }
+
+  // Connect to the contract to mint the NFT!
+  const mintNFT = async (metadata) => {
+    //wallet checks required here.
+    setStatus({
+      ...status,
+      loading: loadingMsg('Waiting for wallet permission...'),
+    })
+    const contract = await getContractConnection('write')
+
+    if (contract) {
+      await contract
+        .mintBacalhauNFT(
+          userWallet.accounts[0],
+          metadata.url //test ipfs address
+        )
+        .then(async (data) => {
+          console.log('CALLED FUNCTION', data)
+          setStatus({
+            ...status,
+            loading: loadingMsg('Minting NFT...'),
+          })
+          await data
+            .wait()
+            .then(async (tx) => {
+              console.log('tx', tx)
+              //CURRENTLY NOT RETURNING TX - (I use event triggering to see)
+              let tokenId = tx.events[1].args.tokenId.toString()
+              console.log('tokenId args', tokenId)
+              setStatus({
+                ...INITIAL_TRANSACTION_STATE,
+                success: successMintingNFTmsg(data),
+              })
+            })
+            .catch((err) => {
+              console.log('ERROR', err)
+              setStatus({
+                ...status,
+                loading: '',
+                error: errorMsg(err.message, 'Error minting NFT'),
+              })
+            })
+        })
+        .catch((err) => {
+          console.log('ERROR1', err)
+          setStatus({
+            ...status,
+            loading: '',
+            error: errorMsg(
+              err && err.message ? err.message : null,
+              'Error minting NFT'
+            ),
+          })
+        })
+    }
+  }
+
   return (
     <main className="flex min-h-screen flex-col items-center p-24">
       {!status.loading && status !== INITIAL_TRANSACTION_STATE && (
@@ -137,6 +237,14 @@ export default function Images() {
           disabled={Boolean(status.loading) || !Boolean(prompt)}
           text="Generate Image"
         />
+
+        {!bacalhauImages[0].minted && (
+          <PromptButton
+            text={'Mint NFT!'}
+            disabled={Boolean(status.loading)}
+            action={() => saveToNFTStorage(bacalhauImages[0])}
+          />
+        )}
       </PromptInput>
     </main>
   )
