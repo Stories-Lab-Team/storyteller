@@ -9,7 +9,8 @@ export default function Navbar() {
   const [resolveENSname, setResolveENSname] = useState('')
   const [dropdownTwoOpen, setDropdownTwoOpen] = useState(false)
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen)
-  const toggleDropdownTwo = () => setDropdownTwoOpen(!dropdownOpen)
+  const toggleDropdownTwo = () => setDropdownTwoOpen(!dropdownTwoOpen)
+
 
   useEffect(() => {
     // getESNResolve()

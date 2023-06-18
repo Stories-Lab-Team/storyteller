@@ -166,7 +166,7 @@ export default function Home() {
           <p className="text-xl">Fuse your imaginations...</p>
         </div>
       </section>
-      <main className="flex flex-col min-h-screen items-start justify-between p-12 bg-gray-950">
+      <main className="flex flex-col min-h-screen items-start justify-between p-12 bg-gray-950" >
         <section className="flex flex-col justify-start w-full mt-0">
           <h1 className="text-2xl text-white font-bold mb-0 flex flex-col">
             Open Challenges
@@ -272,7 +272,7 @@ export default function Home() {
           </div>
         </section>
         <footer className="w-full bg-gray-800 text-white py-8">
-          <div className="container mx-auto px-6 md:px-12 flex flex-wrap justify-between items-center">
+          <div className="container mx-auto px-6 md:px-12 flex flex-wrap justify-between items-center" key={index}>
             <div>
               <h3 className="text-xl  text-white font-bold">Storytellers</h3>
               <p className="mt-2 text-sm">
@@ -306,7 +306,7 @@ export default function Home() {
             <div>
               <h3 className="text-xl font-bold">Follow us:</h3>
               <div className="flex space-x-4 mt-2 ">
-                <li href="#" cllissNlime="text-xl">
+                <li href="#" cllisslime="text-xl">
                   <i className="fab fa-facebook"></i>
                 </li>
                 <div href="#" className="text-xl">

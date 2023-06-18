@@ -55,12 +55,12 @@ const wagmiConfig = createConfig({
   webSocketPublicClient,
 })
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps, index }) {
   return (
     <WagmiConfig config={wagmiConfig}>
       <RainbowKitProvider chains={chains}>
         <Layout>
-          <Component {...pageProps} />
+          <Component key={index} {...pageProps} />
         </Layout>
       </RainbowKitProvider>
     </WagmiConfig>
