@@ -166,12 +166,14 @@ export default function Home() {
           <p className="text-xl">Fuse your imaginations...</p>
         </div>
       </section>
-      <main className="flex flex-col min-h-screen items-start justify-between p-12 bg-gray-950" >
+      <main className="flex flex-col min-h-screen items-start justify-between p-12 bg-gray-950">
         <section className="flex flex-col justify-start w-full mt-0">
           <h1 className="text-2xl text-white font-bold mb-0 flex flex-col">
             Open Challenges
           </h1>
-          <h2 className='text-white'>Creathon<span className='text-white'> (What is Creathon?)</span></h2>
+          <h2 className="text-white">
+            Creathon<span className="text-white"> (What is Creathon?)</span>
+          </h2>
           <div className="flex-row flex">
             {cards.map((card) => (
               <div
@@ -194,7 +196,9 @@ export default function Home() {
                     #{card.media}
                   </span>
                   <Link href={`/hackathon/${card.id}`}>
-                    <button className="btn text-gray-500 bg-gray-950 button-shine">Detail ▶</button>
+                    <button className="btn text-gray-500 bg-gray-950 button-shine">
+                      Detail ▶
+                    </button>
                   </Link>
                 </div>
               </div>
@@ -216,7 +220,7 @@ export default function Home() {
               🔥 Hot Stories{' '}
             </h2>
             {hotStories.map((story, index) => (
-              <Link href="/content">
+              <Link href="/content" key={index}>
                 <div
                   key={index}
                   className="card bg-white mb-4 flex items-start flex flex-row cursor-pointer"
@@ -242,7 +246,9 @@ export default function Home() {
               </Link>
             ))}
             <Link href="/stories">
-              <p className="btn border-primary text-gray-200 bg-transparent mt-4">View All</p>
+              <p className="btn border-primary text-gray-200 bg-transparent mt-4">
+                View All
+              </p>
             </Link>
           </div>
 
@@ -272,7 +278,10 @@ export default function Home() {
           </div>
         </section>
         <footer className="w-full bg-gray-800 text-white py-8">
-          <div className="container mx-auto px-6 md:px-12 flex flex-wrap justify-between items-center" key={index}>
+          <div
+            className="container mx-auto px-6 md:px-12 flex flex-wrap justify-between items-center"
+            key={index}
+          >
             <div>
               <h3 className="text-xl  text-white font-bold">Storytellers</h3>
               <p className="mt-2 text-sm">
