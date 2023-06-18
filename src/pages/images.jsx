@@ -157,7 +157,7 @@ export default function Images() {
 
     if (contract) {
       await contract
-        .mintBacalhauNFT(
+        .mintStoryTellerNFT(
           address,
           metadata.url //test ipfs address
         )
